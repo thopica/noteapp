@@ -39,7 +39,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         localStorage.setItem('notes', JSON.stringify(notes));
         renderNotes();
-        noteEditor.style.display = 'none';
+        openNoteEditor(0);
     }
 
     function closeNoteEditor() {
@@ -58,4 +58,8 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     renderNotes();
+
+    if (notes.length > 0) {
+        openNoteEditor(0); // Show the latest note by default
+    }
 });
