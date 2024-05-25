@@ -1,107 +1,75 @@
-body {
-    display: flex;
-    font-family: Arial, sans-serif;
-    margin: 0;
-    height: 100vh;
-    overflow: hidden;
-}
+document.addEventListener('DOMContentLoaded', () => {
+    let notes = JSON.parse(localStorage.getItem('notes')) || [];
+    const noteList = document.getElementById('note-list');
+    const noteEditor = document.getElementById('note-editor');
+    const noteText = document.getElementById('note-text');
+    const newNoteButton = document.getElementById('new-note');
+    const saveNoteButton = document.getElementById('save-note');
+    const closeNoteButton = document.getElementById('close-note');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const sidebar = document.getElementById('sidebar');
 
-#sidebar {
-    width: 250px;
-    background: #2c3e50;
-    color: white;
-    padding: 10px;
-    overflow-y: auto;
-}
+    let currentNoteIndex = null;
 
-#main {
-    flex: 1;
-    padding: 10px;
-    display: flex;
-    flex-direction: column;
-}
-
-.note-title {
-    background: #34495e;
-    padding: 10px;
-    margin-bottom: 5px;
-    cursor: pointer;
-}
-
-.note-title:hover {
-    background: #1abc9c;
-}
-
-button {
-    padding: 10px 15px;
-    margin-right: 5px;
-    background: #3498db;
-    color: white;
-    border: none;
-    cursor: pointer;
-}
-
-button:hover {
-    background: #2980b9;
-}
-
-#note-editor {
-    display: none;
-    flex-direction: column;
-}
-
-#note-text {
-    flex: 1;
-    padding: 10px;
-    margin-top: 10px;
-}
-
-.hamburger-menu {
-    display: none;
-    position: fixed;
-    top: 10px;
-    right: 10px;
-    font-size: 30px;
-    cursor: pointer;
-    z-index: 1000;
-}
-
-/* Responsive Design */
-@media (max-width: 768px) {
-    body {
-        flex-direction: column;
+    function renderNotes() {
+        noteList.innerHTML = '';
+        notes.forEach((note, index) => {
+            const noteTitle = document.createElement('div');
+            noteTitle.classList.add('note-title');
+            noteTitle.textContent = note.slice(0, 20) + '...';
+            noteTitle.dataset.index = index;
+            noteList.appendChild(noteTitle);
+        });
     }
 
-    #sidebar {
-        display: none;
-        width: 100%;
-        height: auto;
+    function openNoteEditor(index = null) {
+        currentNoteIndex = index;
+        if (index !== null) {
+            noteText.value = notes[index];
+        } else {
+            noteText.value = '';
+        }
+        noteEditor.style.display = 'flex';
     }
 
-    .note-title {
-        margin: 5px;
-        text-align: center;
+    function saveNote() {
+        const noteContent = noteText.value;
+        if (currentNoteIndex !== null) {
+            notes[currentNoteIndex] = noteContent;
+        } else {
+            notes.unshift(noteContent);
+        }
+        localStorage.setItem('notes', JSON.stringify(notes));
+        renderNotes();
+        openNoteEditor(0);
     }
 
-    #main {
-        padding: 5px;
+    function closeNoteEditor() {
+        noteEditor.style.display = 'none';
     }
 
-    #note-editor {
-        padding: 5px;
-    }
+    newNoteButton.addEventListener('click', () => openNoteEditor());
+    saveNoteButton.addEventListener('click', saveNote);
+    closeNoteButton.addEventListener('click', closeNoteEditor);
 
-    #note-text {
-        width: 100%;
-        height: 200px;
-    }
+    noteList.addEventListener('click', (event) => {
+        if (event.target.classList.contains('note-title')) {
+            const index = event.target.dataset.index;
+            openNoteEditor(index);
+        }
+    });
 
-    button {
-        margin: 5px 0;
-        width: 100%;
-    }
+    mobileMenu.addEventListener('click', () => {
+        if (sidebar.style.display === 'block') {
+            sidebar.style.display = 'none';
+        } else {
+            sidebar.style.display = 'block';
+        }
+    });
 
-    .hamburger-menu {
-        display: block;
+    renderNotes();
+
+    if (notes.length > 0) {
+        openNoteEditor(0); // Show the latest note by default
     }
-}
+});
