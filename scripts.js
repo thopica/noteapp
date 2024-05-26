@@ -1,27 +1,26 @@
-document.addEventListener('DOMContentLoaded', () => {
-    let notes = JSON.parse(localStorage.getItem('notes')) || [];
-    const noteList = document.getElementById('note-list');
-    const noteEditor = document.getElementById('note-editor');
-    const noteText = document.getElementById('note-text');
-    const newNoteButton = document.getElementById('new-note');
-    const saveNoteButton = document.getElementById('save-note');
-    const closeNoteButton = document.getElementById('close-note');
-    const mobileMenu = document.getElementById('mobile-menu');
-    const sidebar = document.getElementById('sidebar');
+document.addEventListener('DOMContentLoaded', function() {
+  const raffleForm = document.getElementById('raffleForm');
+  const drawButton = document.getElementById('drawButton');
+  const winnerDisplay = document.getElementById('winnerDisplay');
+  let participants = [];
 
-    let currentNoteIndex = null;
-
-    function renderNotes() {
-        noteList.innerHTML = '';
-        notes.forEach((note, index) => {
-            const noteTitle = document.createElement('div');
-            noteTitle.classList.add('note-title');
-            noteTitle.textContent = note.slice(0, 20) + '...';
-            noteTitle.dataset.index = index;
-            noteList.appendChild(noteTitle);
-        });
+  raffleForm.addEventListener('submit', function(event) {
+    event.preventDefault();
+    const nameInput = document.getElementById('name');
+    const name = nameInput.value.trim();
+    if (name) {
+      participants.push(name);
+      nameInput.value = '';
+      alert(`${name} has been added!`);
     }
+  });
 
-    function openNoteEditor(index = null) {
-        currentNoteIndex = index;
-        if (index !==
+  drawButton.addEventListener('click', function() {
+    if (participants.length === 0) {
+      alert('No participants to draw from!');
+      return;
+    }
+    const winner = participants[Math.floor(Math.random() * participants.length)];
+    winnerDisplay.textContent = `The winner is: ${winner}`;
+  });
+});
