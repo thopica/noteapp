@@ -48,6 +48,12 @@ button:hover {
   background-color: #e55b50;
 }
 
+#confirmationMessage {
+  margin-top: 10px;
+  color: #28a745;
+  font-size: 1.2em;
+}
+
 #winnerDisplay {
   margin-top: 20px;
   font-size: 1.5em;
