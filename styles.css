@@ -1,85 +1,92 @@
-body {
-  font-family: 'Arial', sans-serif;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%);
+/* Reset default styles */
+body, h1, form, input, button {
   margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-.container {
-  text-align: center;
-  padding: 20px 40px;
-  background: white;
-  border: 2px solid #ff6f61;
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+/* Header styles */
+header {
+  background-color: #ff4081;
+  padding: 20px;
 }
 
 h1 {
-  font-size: 2.5em;
-  color: #ff6f61;
-  margin-bottom: 20px;
+  color: white;
+  text-align: center;
+  font-size: 32px;
 }
 
-input {
-  margin: 10px 0;
-  padding: 12px;
-  width: 100%;
-  max-width: 300px;
-  border: 1px solid #ddd;
+/* Container styles */
+.container {
+  max-width: 400px;
+  margin: 20px auto;
+  padding: 20px;
+  border: 1px solid #ccc;
   border-radius: 4px;
 }
 
-button {
-  margin: 10px 5px;
-  padding: 12px 20px;
+/* Form styles */
+form {
+  margin-bottom: 20px;
+}
+
+.btn-group {
+  display: flex;
+  gap: 10px;
+}
+
+label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+input[type="text"] {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin-bottom: 16px;
+}
+
+button[type="submit"], #draw-button, #reset-button {
+  width: 100%;
+  padding: 8px;
+  background-color: #ff4081;
   color: white;
   border: none;
   border-radius: 4px;
   cursor: pointer;
-  font-size: 1em;
-  transition: background-color 0.3s ease;
+  font-weight: bold;
+  transition: background-color 0.3s;
 }
 
-button[type="submit"] {
-  background-color: #ff6f61;
-}
-
-button[type="submit"]:hover {
-  background-color: #e55b50;
-}
-
-#drawButton {
-  background-color: #ff6f61;
-}
-
-#drawButton:hover {
-  background-color: #e55b50;
-}
-
-#resetButton {
+#reset-button {
   background-color: #007bff;
 }
 
-#resetButton:hover {
+#reset-button:hover {
   background-color: #1367c0;
 }
 
-#confirmationMessage {
-  margin-top: 10px;
-  color: #28a745;
-  font-size: 1.2em;
+button[type="submit"]:hover, #draw-button:hover {
+  background-color: #d5004e;
 }
 
-#winnerDisplay {
-  margin-top: 20px;
-  font-size: 1.5em;
+button[type="submit"]:focus, #draw-button:focus {
+  outline: none;
+}
+
+/* Participants list styles */
+#participants-list {
+  margin-bottom: 20px;
+}
+
+/* Winner display styles */
+#winner-display {
+  text-align: center;
+  font-size: 24px;
   font-weight: bold;
-  color: #ff6f61;
-}
-
-.fas.fa-birthday-cake {
-  color: #ff6f61;
+  margin-bottom: 20px;
 }
