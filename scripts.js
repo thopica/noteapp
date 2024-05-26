@@ -2,6 +2,7 @@ document.addEventListener('DOMContentLoaded', function() {
   const raffleForm = document.getElementById('raffleForm');
   const drawButton = document.getElementById('drawButton');
   const winnerDisplay = document.getElementById('winnerDisplay');
+  const confirmationMessage = document.getElementById('confirmationMessage');
   let participants = [];
 
   raffleForm.addEventListener('submit', function(event) {
@@ -11,7 +12,10 @@ document.addEventListener('DOMContentLoaded', function() {
     if (name) {
       participants.push(name);
       nameInput.value = '';
-      alert(`${name} has been added!`);
+      confirmationMessage.textContent = `${name} has been added!`;
+      setTimeout(() => {
+        confirmationMessage.textContent = '';
+      }, 3000);
     }
   });
 
