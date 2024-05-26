@@ -1,28 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Note Taking App</title>
-    <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cake Raffle</title>
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <aside id="sidebar">
-        <button id="new-note">New Note</button>
-        <div id="note-list"></div>
-    </aside>
-    <main id="main">
-        <div id="note-editor">
-            <textarea id="note-text" rows="10" cols="30" aria-label="Note text"></textarea>
-            <div>
-                <button id="save-note">Save Note</button>
-                <button id="close-note">Close</button>
-            </div>
-        </div>
-    </main>
-    <div id="mobile-menu" class="hamburger-menu">
-        &#9776;
-    </div>
-    <script src="scripts.js"></script>
+  <div class="container">
+    <h1>Cake Raffle</h1>
+    <form id="raffleForm">
+      <label for="name">Enter your name:</label>
+      <input type="text" id="name" required>
+      <button type="submit">Add Participant</button>
+    </form>
+    <button id="drawButton">Draw</button>
+    <div id="winnerDisplay"></div>
+  </div>
+  <script src="scripts.js"></script>
 </body>
 </html>
